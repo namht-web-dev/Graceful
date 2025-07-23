@@ -316,3 +316,8 @@ main{
   color: var(--primary-700);
   font-weight: 700;
 }
+
+.form-control input{
+  outline: none;
+  font-weight: 700;
+}
