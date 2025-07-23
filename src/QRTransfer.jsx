@@ -9,7 +9,7 @@ const QRTransfer = () => {
   // const [amount, setAmount] = useState(0);
   // const [description, setDescription] = useState("");
   const [transferInfo, setTransferInfo] = useState({
-    accountNumber: "",
+    accountNumber: "9981510747",
     amount: 0,
     description: "",
     bankCode: "970436",
