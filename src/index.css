@@ -281,6 +281,7 @@ main{
   padding: 3rem 5rem;
   border-radius: var(--borderRadius);
   box-shadow: var(--shadow-3);
+  transition: var(--transition);
 }
 
 .form-control{
@@ -319,4 +320,12 @@ main{
 
 .form-control input{
   outline: none;
+}
+
+.form-control input:focus{
+  border-color: var(--primary-500);
+}
+
+.qr-container:hover{
+  background-color: var(--primary-400);
 }
