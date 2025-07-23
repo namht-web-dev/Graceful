@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { bankCodeData } from "./data.js";
+import QRImg from "./QRImg.jsx";
 
 const QRTransfer = () => {
   const [qrText, setQRText] = useState(
     "https://img.vietqr.io/image/970436-9981510747-qr_only.png"
   );
+  const [isShowQR, setIsShowQR] = useState(false);
   // const [accountNumber, setAccountNumber] = useState("");
   // const [amount, setAmount] = useState(0);
   // const [description, setDescription] = useState("");
@@ -22,12 +24,11 @@ const QRTransfer = () => {
     setQRText(
       `https://img.vietqr.io/image/${transferInfo.bankCode}-${transferInfo.accountNumber}-qr_only.png?amount=${transferInfo.amount}&addInfo=${transferInfo.description}`
     );
+    setIsShowQR(true);
   };
   return (
     <section className="qr-container">
-      <div className="qr-img">
-        <img src={qrText} alt="QR" />
-      </div>
+      {isShowQR && <QRImg qrText={qrText} setIsShowQR={setIsShowQR} />}
       <form className="form-container" onSubmit={genQRText}>
         <div className="form-control">
           <label className="form-label" htmlFor="bankCode">
