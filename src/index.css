@@ -312,12 +312,11 @@ main{
   font-weight: 700;
 }
 
-.form-control option{
+.form-control option, .form-control input{
   color: var(--primary-700);
   font-weight: 700;
 }
 
 .form-control input{
   outline: none;
-  font-weight: 700;
 }
