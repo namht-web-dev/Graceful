@@ -49,55 +49,58 @@ const QRTransfer = () => {
 
   return (
     <section className="qr-container">
-      {isShowQR && <QRImg qrText={qrText} setIsShowQR={setIsShowQR} />}
-      <form className="form-container" onSubmit={genQRText}>
-        <div className="form-control">
-          <label className="form-label" htmlFor="bankCode">
-            ngân hàng
-          </label>
-          <select
-            name="bankCode"
-            id="bankCode"
-            onChange={onChangeInputValue}
-            defaultValue={bankCode}
-          >
-            {bankCodeData.map((bank) => {
-              const { bank_code, ma_nh_dt, ten_nh } = bank;
-              return (
-                <option key={ma_nh_dt} value={bank_code}>
-                  {ma_nh_dt} - {ten_nh.trim()}
-                </option>
-              );
-            })}
-          </select>
-        </div>
-        <FormInput
-          name="accountNumber"
-          value={accountNumber}
-          label="Số tài khoản"
-          onChangeInputValue={onChangeInputValue}
-        />
+      {isShowQR ? (
+        <QRImg qrText={qrText} setIsShowQR={setIsShowQR} />
+      ) : (
+        <form className="form-container" onSubmit={genQRText}>
+          <div className="form-control">
+            <label className="form-label" htmlFor="bankCode">
+              ngân hàng
+            </label>
+            <select
+              name="bankCode"
+              id="bankCode"
+              onChange={onChangeInputValue}
+              defaultValue={bankCode}
+            >
+              {bankCodeData.map((bank) => {
+                const { bank_code, ma_nh_dt, ten_nh } = bank;
+                return (
+                  <option key={ma_nh_dt} value={bank_code}>
+                    {ma_nh_dt} - {ten_nh.trim()}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+          <FormInput
+            name="accountNumber"
+            value={accountNumber}
+            label="Số tài khoản"
+            onChangeInputValue={onChangeInputValue}
+          />
 
-        <FormInput
-          name="amount"
-          value={formatNumber(amount)}
-          label=" Số tiền"
-          onChangeInputValue={onChangeInputValue}
-        />
+          <FormInput
+            name="amount"
+            value={formatNumber(amount)}
+            label=" Số tiền"
+            onChangeInputValue={onChangeInputValue}
+          />
 
-        <FormInput
-          name="description"
-          value={description}
-          label="Nội dung ck"
-          onChangeInputValue={onChangeInputValue}
-        />
+          <FormInput
+            name="description"
+            value={description}
+            label="Nội dung ck"
+            onChangeInputValue={onChangeInputValue}
+          />
 
-        <div className="btn-container">
-          <button type="submit" className="btn btn-submit">
-            Tạo QR code
-          </button>
-        </div>
-      </form>
+          <div className="btn-container">
+            <button type="submit" className="btn btn-submit">
+              Tạo QR code
+            </button>
+          </div>
+        </form>
+      )}
     </section>
   );
 };
