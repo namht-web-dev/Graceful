@@ -53,7 +53,7 @@ const QRTransfer = () => {
       <form className="form-container" onSubmit={genQRText}>
         <div className="form-control">
           <label className="form-label" htmlFor="bankCode">
-            Mã ngân hàng
+            ngân hàng
           </label>
           <select
             name="bankCode"
