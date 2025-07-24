@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { bankCodeData } from "./data.js";
 import QRImg from "./QRImg.jsx";
+import FormInput from "./FormInput.jsx";
 
 const QRTransfer = () => {
   const [qrText, setQRText] = useState(
@@ -12,20 +13,40 @@ const QRTransfer = () => {
   // const [description, setDescription] = useState("");
   const [transferInfo, setTransferInfo] = useState({
     accountNumber: "9981510747",
-    amount: 0,
+    amount: "",
     description: "",
     bankCode: "970436",
   });
   const onChangeInputValue = (e) => {
-    setTransferInfo({ ...transferInfo, [e.target.name]: e.target.value });
+    const name = e.target.name;
+    const input = e.target.value;
+
+    let rawValue = input;
+    if (name === "amount") {
+      rawValue = input
+        .replace(/\./g, ",")
+        .replace(/,/g, "")
+        .replace(/[^\d.-]/g, "");
+    }
+
+    setTransferInfo((prev) => ({
+      ...prev,
+      [name]: rawValue,
+    }));
   };
+  const { accountNumber, amount, description, bankCode } = transferInfo;
   const genQRText = (e) => {
     e.preventDefault();
     setQRText(
-      `https://img.vietqr.io/image/${transferInfo.bankCode}-${transferInfo.accountNumber}-qr_only.png?amount=${transferInfo.amount}&addInfo=${transferInfo.description}`
+      `https://img.vietqr.io/image/${bankCode}-${accountNumber}-qr_only.png?amount=${amount}&addInfo=${description}`
     );
     setIsShowQR(true);
   };
+  const formatNumber = (numStr) => {
+    if (numStr === "" || isNaN(numStr)) return 0;
+    return Number(numStr).toLocaleString("en-US").replace(/,/g, ".");
+  };
+
   return (
     <section className="qr-container">
       {isShowQR && <QRImg qrText={qrText} setIsShowQR={setIsShowQR} />}
@@ -38,7 +59,7 @@ const QRTransfer = () => {
             name="bankCode"
             id="bankCode"
             onChange={onChangeInputValue}
-            defaultValue="970436"
+            defaultValue={bankCode}
           >
             {bankCodeData.map((bank) => {
               const { bank_code, ma_nh_dt, ten_nh } = bank;
@@ -50,46 +71,26 @@ const QRTransfer = () => {
             })}
           </select>
         </div>
-        <div className="form-control">
-          <label className="form-label" htmlFor="accountNumber">
-            Số tài khoản
-          </label>
-          <input
-            onChange={onChangeInputValue}
-            className="form-input"
-            type="text"
-            name="accountNumber"
-            id="accountNumber"
-            value={transferInfo.accountNumber}
-          />
-        </div>
-        <div className="form-control">
-          <label className="form-label" htmlFor="amount">
-            Số tiền
-          </label>
-          <input
-            onChange={onChangeInputValue}
-            className="form-input"
-            type=""
-            name="amount"
-            id="amount"
-            value={transferInfo.amount}
-          />
-        </div>
+        <FormInput
+          name="accountNumber"
+          value={accountNumber}
+          label="Số tài khoản"
+          onChangeInputValue={onChangeInputValue}
+        />
 
-        <div className="form-control">
-          <label className="form-label" htmlFor="description">
-            Nội dung ck
-          </label>
-          <input
-            onChange={onChangeInputValue}
-            className="form-input"
-            type="text"
-            name="description"
-            id="description"
-            value={transferInfo.description}
-          />
-        </div>
+        <FormInput
+          name="amount"
+          value={formatNumber(amount)}
+          label=" Số tiền"
+          onChangeInputValue={onChangeInputValue}
+        />
+
+        <FormInput
+          name="description"
+          value={description}
+          label="Nội dung ck"
+          onChangeInputValue={onChangeInputValue}
+        />
 
         <div className="btn-container">
           <button type="submit" className="btn btn-submit">
