@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { bankCodeData } from "./data.js";
 import QRImg from "./QRImg.jsx";
 import FormInput from "./FormInput.jsx";
+import { ToastContainer, toast } from "react-toastify";
 
 const QRTransfer = () => {
   const [qrText, setQRText] = useState(
@@ -12,11 +12,12 @@ const QRTransfer = () => {
   // const [amount, setAmount] = useState(0);
   // const [description, setDescription] = useState("");
   const [transferInfo, setTransferInfo] = useState({
-    accountNumber: "9981510747",
+    accountNumber: "9984707504",
     amount: "",
     description: "",
     bankCode: "970436",
   });
+  const bankCodeData = [];
   const onChangeInputValue = (e) => {
     const name = e.target.name;
     const input = e.target.value;
@@ -41,14 +42,19 @@ const QRTransfer = () => {
       `https://img.vietqr.io/image/${bankCode}-${accountNumber}-qr_only.png?amount=${amount}&addInfo=${description}`
     );
     setIsShowQR(true);
+    notify();
   };
   const formatNumber = (numStr) => {
     if (numStr === "" || isNaN(numStr)) return 0;
     return Number(numStr).toLocaleString("en-US").replace(/,/g, ".");
   };
+  const notify = () => toast("Wow so easy!");
 
   return (
     <>
+      <div className="login-warning">
+        <ToastContainer position="top-center" />
+      </div>
       {isShowQR ? (
         <QRImg qrText={qrText} setIsShowQR={setIsShowQR} />
       ) : (
