@@ -538,27 +538,40 @@ j:nth-child(3n+2){
   transition: var(--transition);
 }
 
-.menu{
-  background-color: #0f5132;
+.menu, .picked-items, .payment{
   
-  padding: 1rem;
-  display: flex;
-  justify-content: center;
-  gap: 4rem;
   border-radius: var(--borderRadius);
+  box-shadow: var(--shadow-4);
+}
+
+.menu{
+  padding: 1rem;
+  background-color: #0f5132;
   transition: var(--transition);
 }
 
-.menu label{
+.menu-type{
+  
+  
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  
+}
+
+.menu-type label{
   text-transform: capitalize;
   font-weight: 600;
   color: white;
-
 }
 
-.menu label input{
+.menu-type label input[type="radio"]{
   margin-right: 0.5rem;
   cursor: pointer;
+}
+
+select{
+  width: 100%;
 }
 
 
@@ -567,14 +580,41 @@ j:nth-child(3n+2){
   background-color: #0f172a;
   color: white;
   padding: 1rem;
-  width: 50vw;
+  min-width: 60vw;
   transition: var(--transition);
+  height: 70vh;
 }
 
 .payment{
   background-color: #1a6aa2;
   padding: 1rem;
   transition: var(--transition);
+
+}
+
+.type-select{
+  margin-top: 1rem;
+  padding: 0.35rem;
+  border-radius: var(--borderRadius);
+  font-weight: 700;
+  outline: none;
+}
+.type-select:focus{
+    border: 1px solid var(--primary-500);
+}
+.type-select option{
+  font-weight: 700;
+}
+
+.picked-item-images{
+  display: grid;
+  height: 100%;
+  place-items: center;
+}
+
+.picked-item-images img{
+  width: 300px;
+  height: 300px;
 }
 
 
@@ -586,7 +626,6 @@ j:nth-child(3n+2){
     align-items: center;
     padding: 0 5rem;
   }
-  .picked-items{
-    height: 70vh;
-  }
+  
 }
+
