@@ -551,8 +551,6 @@ j:nth-child(3n+2){
 }
 
 .menu-type{
-  
-  
   display: flex;
   justify-content: center;
   gap: 4rem;
@@ -574,22 +572,41 @@ select{
   width: 100%;
 }
 
+.add-btn{
+  display: block;
+  margin: 0 auto;
+  margin-top: 1rem;
+  background: white;
+  padding: 0.5rem 1rem;
+  border-radius: var(--borderRadius);
+  border: transparent;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: var(--letterSpacing);
+  color: var(--primary-700);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.add-btn:hover{
+  background: var(--primary-500);
+  color: white;
+}
+
 
 .picked-items{
-  height: 40vh;
   background-color: #0f172a;
   color: white;
   padding: 1rem;
-  min-width: 60vw;
+  min-width: 90vw;
   transition: var(--transition);
-  height: 70vh;
+  height: 50vh;
 }
 
 .payment{
   background-color: #1a6aa2;
   padding: 1rem;
   transition: var(--transition);
-
 }
 
 .type-select{
@@ -606,16 +623,38 @@ select{
   font-weight: 700;
 }
 
+.picked-items h4{
+  text-align: center;
+}
+
 .picked-item-images{
   display: grid;
-  height: 100%;
+  
   place-items: center;
+  height: 100%;
 }
 
 .picked-item-images img{
-  width: 300px;
-  height: 300px;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 100px;
 }
+
+.center-last-item {
+  grid-column: 1 / -1;
+  justify-self: center;
+}
+
+.items{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+
 
 
 @media screen and (min-width: 992px) {

@@ -1,5 +1,5 @@
 import { useGlobalContext } from "./AppContext";
-import { singleDish, combo, singleJuice } from "./data";
+import { singleDish, combo } from "./data";
 
 const menuTypes = [
   { id: 1, label: "món đơn" },
@@ -7,9 +7,10 @@ const menuTypes = [
 ];
 
 const Menu = () => {
-  const { type, setType, dish, setDish } = useGlobalContext();
+  const { type, setType, dish, setDish, addItemHandler } = useGlobalContext();
   const onChangeType = (e) => {
     setType(e.target.value);
+    setDish(e.target.value == 1 ? "banhbao" : "single1");
   };
   return (
     <section className="menu">
@@ -37,14 +38,26 @@ const Menu = () => {
         defaultValue={dish}
         onChange={(e) => setDish(e.target.value)}
       >
-        {singleDish.map((item) => {
-          return (
-            <option key={item.id} value={item.id}>
-              {item.label}
-            </option>
-          );
-        })}
+        {type == 1 &&
+          singleDish.map((item) => {
+            return (
+              <option style={item.style ?? {}} key={item.id} value={item.id}>
+                {item.label}
+              </option>
+            );
+          })}
+        {type == 2 &&
+          combo.map((item) => {
+            return (
+              <option key={item.id} value={item.id}>
+                {item.label}
+              </option>
+            );
+          })}
       </select>
+      <button onClick={() => addItemHandler(dish)} className="add-btn">
+        Thêm
+      </button>
     </section>
   );
 };

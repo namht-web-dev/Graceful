@@ -1,14 +1,49 @@
+import { useEffect, useState } from "react";
 import { useGlobalContext } from "./AppContext";
-import { singleDish } from "./data";
+import { combo, singleDish } from "./data";
 
 const PickedItems = () => {
-  const { dish } = useGlobalContext();
-  const { image, label } = singleDish.filter((item) => item.id === dish)[0];
-  console.log(image, label);
+  const { type, dish } = useGlobalContext();
+  const [picked, setPicked] = useState([]);
+  const itemPicked = (type == 1 ? singleDish : combo).filter(
+    (item) => item.id === dish
+  )[0];
+  let label = itemPicked.label;
+
+  useEffect(() => {
+    if (type == 1) setPicked([itemPicked]);
+    if (type == 2) {
+      const { dishes, discount } = itemPicked;
+      label = itemPicked.label;
+      const pickedDish = singleDish.filter((item) => dishes.includes(item.id));
+      setPicked(pickedDish);
+      console.log(discount);
+    }
+  }, [type, dish]);
+
   return (
     <div className="picked-items">
-      <div className="picked-item-images">
-        <img src={image} alt={label} />
+      <h4>{label}</h4>
+      <div
+        style={{
+          gridTemplateColumns: picked.length > 1 ? "1fr 1fr" : "1fr",
+        }}
+        className="picked-item-images"
+      >
+        {picked.map((pick, index) => {
+          const { id, image, label, price } = pick;
+          return (
+            <div
+              className={`items ${
+                picked.length === 3 && index == 2 ? "center-last-item" : ""
+              }`}
+              key={id}
+            >
+              <img src={image} alt={label} />
+              <span>{price}</span>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

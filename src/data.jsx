@@ -19,7 +19,8 @@ export const singleDish = [
   },
   {
     id: "linebreak",
-    label: "Be",
+    label: "Nước uống",
+    style: { textTransform: "uppercase", color: "orange" },
   },
   {
     id: "eptao",
@@ -69,36 +70,31 @@ export const combo = [
   {
     id: "single1",
     label: "Bữa sáng căng tròn",
-    dishes: "banhbao",
-    juices: "caphesua",
+    dishes: "banhbao,caphesua",
     discount: 2,
   },
   {
     id: "single2",
     label: "Combo huyền thoại",
-    dishes: "hamburger",
-    juices: "caphesua",
+    dishes: "hamburger,caphesua",
     discount: 2,
   },
   {
     id: "single3",
     label: "Ấm bụng ban mai",
-    dishes: "chaolong",
-    juices: "caphesua",
+    dishes: "chaolong,caphesua",
     discount: 2,
   },
   {
     id: "double1",
     label: "Dinh dưỡng lành mạnh",
-    dishes: "chaolong,banhbao",
-    juices: "epcam,eptao",
+    dishes: "chaolong,banhbao,epcam,eptao",
     discount: 5,
   },
   {
     id: "ahalf1",
     label: "Vị quê",
-    dishes: "chaolong,hamburger",
-    juices: "caphesua,eptao",
+    dishes: "chaolong,hamburger,caphesua",
     discount: 7,
   },
 ];
