@@ -5,19 +5,17 @@ import { combo, singleDish } from "./data";
 const PickedItems = () => {
   const { type, dish } = useGlobalContext();
   const [picked, setPicked] = useState([]);
-  const itemPicked = (type == 1 ? singleDish : combo).filter(
+  const itemPicked = (type == 1 ? singleDish : combo).find(
     (item) => item.id === dish
-  )[0];
+  );
   let label = itemPicked.label;
-
   useEffect(() => {
     if (type == 1) setPicked([itemPicked]);
     if (type == 2) {
-      const { dishes, discount } = itemPicked;
+      const { dishes } = itemPicked;
       label = itemPicked.label;
       const pickedDish = singleDish.filter((item) => dishes.includes(item.id));
       setPicked(pickedDish);
-      console.log(discount);
     }
   }, [type, dish]);
 

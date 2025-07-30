@@ -1,5 +1,5 @@
 import { useGlobalContext } from "./AppContext";
-import { singleDish, combo } from "./data";
+import { singleDish, combo, getDishPrice, getComboPrice } from "./data";
 
 const menuTypes = [
   { id: 1, label: "món đơn" },
@@ -55,7 +55,16 @@ const Menu = () => {
             );
           })}
       </select>
-      <button onClick={() => addItemHandler(dish)} className="add-btn">
+      <button
+        onClick={() =>
+          addItemHandler(
+            dish,
+            type,
+            type == 1 ? getDishPrice(dish) : getComboPrice(dish)
+          )
+        }
+        className="add-btn"
+      >
         Thêm
       </button>
     </section>

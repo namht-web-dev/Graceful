@@ -654,7 +654,16 @@ select{
   gap: 0.5rem;
 }
 
+.payment-item{
+  display: flex;
+  justify-content: space-between;
+}
 
+.payment-item-info{
+  display: grid;
+  grid-template-columns: auto auto 1fr 1fr 1fr 1fr;
+  gap: 0.5rem;
+}
 
 
 @media screen and (min-width: 992px) {

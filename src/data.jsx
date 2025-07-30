@@ -42,30 +42,6 @@ export const singleDish = [
   },
 ];
 
-export const singleJuice = [
-  {
-    id: "eptao",
-    label: "Nước ép táo",
-    price: 25,
-    image: "/items/eptao.png",
-    type: "juice",
-  },
-  {
-    id: "epcam",
-    label: "Nước ép cam",
-    price: 15,
-    image: "/items/camvat.png",
-    type: "juice",
-  },
-  {
-    id: "caphesua",
-    label: "Cà phê sữa",
-    price: 17,
-    image: "/items/coffee.png",
-    type: "juice",
-  },
-];
-
 export const combo = [
   {
     id: "single1",
@@ -98,3 +74,16 @@ export const combo = [
     discount: 7,
   },
 ];
+
+export const getComboPrice = (comboId) => {
+  const comboDishes = combo
+    .find((item) => item.id === comboId)
+    .dishes.split(",");
+  const dishes = singleDish.filter((item) => comboDishes.includes(item.id));
+  return dishes.reduce((a, b) => a + b.price, 0);
+};
+
+export const getDishPrice = (dishId) => {
+  const dish = singleDish.find((item) => item.id === dishId);
+  return dish.price;
+};
