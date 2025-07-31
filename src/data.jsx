@@ -1,4 +1,4 @@
-export const singleDish = [
+export const foods = [
   {
     id: "hamburger",
     label: "Bánh mì kẹp",
@@ -17,11 +17,9 @@ export const singleDish = [
     price: 20,
     image: "/items/chaolong.png",
   },
-  {
-    id: "linebreak",
-    label: "Nước uống",
-    style: { textTransform: "uppercase", color: "orange" },
-  },
+];
+
+export const beverages = [
   {
     id: "eptao",
     label: "Nước ép táo",
@@ -74,6 +72,11 @@ export const combo = [
     discount: 7,
   },
 ];
+
+export const defaultFood = foods[0].id;
+export const defaultCombo = combo[0].id;
+
+export const singleDish = [...foods, ...beverages];
 
 export const getComboPrice = (comboId) => {
   const comboDishes = combo

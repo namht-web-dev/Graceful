@@ -1,5 +1,13 @@
 import { useGlobalContext } from "./AppContext";
-import { singleDish, combo, getDishPrice, getComboPrice } from "./data";
+import {
+  foods,
+  beverages,
+  combo,
+  getDishPrice,
+  getComboPrice,
+  defaultFood,
+  defaultCombo,
+} from "./data";
 
 const menuTypes = [
   { id: 1, label: "món đơn" },
@@ -10,7 +18,7 @@ const Menu = () => {
   const { type, setType, dish, setDish, addItemHandler } = useGlobalContext();
   const onChangeType = (e) => {
     setType(e.target.value);
-    setDish(e.target.value == 1 ? "banhbao" : "single1");
+    setDish(e.target.value == 1 ? defaultFood : defaultCombo);
   };
   return (
     <section className="menu">
@@ -38,14 +46,29 @@ const Menu = () => {
         defaultValue={dish}
         onChange={(e) => setDish(e.target.value)}
       >
-        {type == 1 &&
-          singleDish.map((item) => {
-            return (
-              <option style={item.style ?? {}} key={item.id} value={item.id}>
-                {item.label}
-              </option>
-            );
-          })}
+        {type == 1 && (
+          <>
+            <optgroup label="Đồ ăn">
+              {foods.map((item) => {
+                return (
+                  <option key={item.id} value={item.id}>
+                    {item.label}
+                  </option>
+                );
+              })}
+            </optgroup>
+            <optgroup label="Nước uống">
+              {beverages.map((item) => {
+                return (
+                  <option key={item.id} value={item.id}>
+                    {item.label}
+                  </option>
+                );
+              })}
+            </optgroup>
+          </>
+        )}
+
         {type == 2 &&
           combo.map((item) => {
             return (

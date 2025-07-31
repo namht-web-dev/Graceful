@@ -13,7 +13,7 @@ const Payment = () => {
     0
   );
   const summaryDiscount = addedItems.reduce(
-    (sum, item) => sum + item.discount,
+    (sum, item) => sum + item.discount * item.count,
     0
   );
 

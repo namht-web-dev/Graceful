@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import { combo, singleDish } from "./data";
+import { combo, defaultCombo, defaultFood, singleDish } from "./data";
 
 const AppContext = createContext();
 
@@ -7,6 +7,7 @@ export const AppProvider = ({ children }) => {
   const [isLogin, setIsLogin] = useState(true);
   const [type, setType] = useState(1);
   const [addedItems, setAddedItems] = useState([]);
+  const [dish, setDish] = useState(type == 1 ? defaultFood : defaultCombo);
   const addItemHandler = (itemId, type, price) => {
     let label = "",
       discount = 0;
@@ -48,7 +49,7 @@ export const AppProvider = ({ children }) => {
       })
     );
   };
-  const [dish, setDish] = useState(type == 1 ? "banhbao" : "single1");
+
   return (
     <AppContext.Provider
       value={{
