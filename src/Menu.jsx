@@ -31,7 +31,7 @@ const Menu = () => {
                 type="radio"
                 name="menu"
                 value={id}
-                defaultChecked={id === type}
+                defaultChecked={id == type}
                 onChange={onChangeType}
               />
               {label}
